@@ -14,4 +14,4 @@ export const getLocation = (
 export const getForecast = (
   { woeid, date }: GetForecastParams
 ): Promise<AxiosResponse<Forecast[]>> =>
-  api.get(`/location/${woeid}/${date}`);
+  api.get(`/location/${woeid}`);

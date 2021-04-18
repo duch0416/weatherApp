@@ -9,7 +9,7 @@ import { getFormatedDate } from "../utils/getFormatedDate";
 
 export const useForecast = (location?: string) => {
   const query = useQuery(
-    QueryKeys.Forecast,
+    [QueryKeys.Forecast, location],
     async () => {
       const res = await getLocation({ query: location });
       const [today, tommorow, twoDaysLater] = getFormatedDate();

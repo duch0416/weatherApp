@@ -4,5 +4,5 @@ export interface GetLocationParams {
 
 export interface GetForecastParams {
   woeid: number;
-  date: string;
+  date?: string;
 }
