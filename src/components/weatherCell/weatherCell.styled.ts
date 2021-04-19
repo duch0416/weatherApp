@@ -6,8 +6,11 @@ import { Breakpoint } from "../../enums/breakpoint.enum";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 350px;
   width: 100%;
+
+  @media ${Breakpoint.MobileS} {
+    max-width: 350px;
+  }
 `;
 
 export const DateText = styled.p`

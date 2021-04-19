@@ -16,19 +16,33 @@ export const Main = styled.div`
   }
 `;
 
-export const Row = styled.div`
+export const InerfaceContainer = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media ${Breakpoint.Tablet} {
+    flex-direction: row;
+  }
 `;
 
 export const StyledSwitch = styled(Switch)`
-  margin-left: 20px;
+  margin-top: 10px;
+
+  @media ${Breakpoint.Tablet} {
+    margin-top: 0;
+    margin-left: 20px;
+  }
 `;
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 350px;
   margin: 0 auto;
+  width: fit-content;
+  
+  @media ${Breakpoint.MobileS} {
+    width: 350px;
+  }
 
   @media ${Breakpoint.Tablet} {
     width: 100%;

@@ -29,6 +29,7 @@ export const useForecast = (location?: string) => {
     },
     {
       refetchOnWindowFocus: false,
+      enabled: !!cords.latitude || !!location
     }
   );
 

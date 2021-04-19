@@ -23,9 +23,10 @@ export const WeatherCell: React.FC<WeatherCellProps> = ({
   air_pressure,
   applicable_date,
   temperatureUnit,
+  id,
 }) => {
   return (
-    <Wrapper>
+    <Wrapper key={id}>
       <DateText>{applicable_date}</DateText>
       <Cell>
         <Row>

@@ -11,14 +11,13 @@ export const Forecast: React.FC<ForecastProps> = ({ location, temperatureUnit })
     <>
       <LocationName>{data && data.data.title}</LocationName>
       <Wrapper>
+        {!data?.data.consolidated_weather && !isLoading && <p>No data</p>}
         {isLoading ? (
           <Loader />
         ) : (
           data?.data.consolidated_weather.slice(0, 3).map(
             (day): JSX.Element => (
-              <>
                 <WeatherCell {...day} key={day.id} temperatureUnit={temperatureUnit}/>
-              </>
             )
           )
         )}

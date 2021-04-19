@@ -6,7 +6,7 @@ import { Forecast } from "../components/forecast/forecast.components";
 import { Search } from "../components/search/search.component";
 import { StorageKeys } from "../enums/storageKeys.enum";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Container, Main, Row, StyledSwitch } from "./app.styled";
+import { Container, Main, InerfaceContainer, StyledSwitch } from "./app.styled";
 import { GlobalStyle } from "../globalStyle";
 import { TemperatureUnit } from "../types/temperatureUnit.type";
 
@@ -34,10 +34,10 @@ const App: React.FC = () => {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Container>
-          <Row>
+          <InerfaceContainer>
             <Search onSearch={setLocation} initValue={location} />
             <StyledSwitch onToggle={handleTemperatureUnitChange}/>
-          </Row>
+          </InerfaceContainer>
           <Forecast location={location} temperatureUnit={temperatureUnit} />
         </Container>
       </QueryClientProvider>

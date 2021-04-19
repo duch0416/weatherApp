@@ -7,7 +7,7 @@ import { Input } from "./search.styled";
 
 export const Search: React.FC<SearchProps> = ({ onSearch, initValue }) => {
   const [currentValue, setCurrentValue] = useState(initValue ?? "");
-  const [debauncedValue] = useDebounce(currentValue, 500);
+  const [debauncedValue] = useDebounce(currentValue, 1000);
 
   const handleChange: ChangeEventHandler = (
     e: ChangeEvent<HTMLInputElement>
