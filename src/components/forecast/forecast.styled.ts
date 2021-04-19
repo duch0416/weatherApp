@@ -6,3 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
 `;
+
+export const LocationName = styled.p`
+  margin-top: 20px;
+`;

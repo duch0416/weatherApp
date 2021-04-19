@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Switch } from "../components/switch/switch.component";
 
 import { Breakpoint } from "../enums/breakpoint.enum";
 import { Color } from "../enums/color.enum";
@@ -17,6 +18,10 @@ export const Main = styled.div`
 
 export const Row = styled.div`
   display: flex;
+`;
+
+export const StyledSwitch = styled(Switch)`
+  margin-left: 20px;
 `;
 
 export const Container = styled.div`

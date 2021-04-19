@@ -9,8 +9,9 @@ import {
   Row,
   RowWithMargin,
   Wrapper,
-  DateText
+  DateText,
 } from "./weatherCell.styled";
+import { parseCelciusToFahrenheit } from "../../utils/parseCelciusToFahrenheit";
 
 export const WeatherCell: React.FC<WeatherCellProps> = ({
   weather_state_abbr,
@@ -21,6 +22,7 @@ export const WeatherCell: React.FC<WeatherCellProps> = ({
   wind_speed,
   air_pressure,
   applicable_date,
+  temperatureUnit,
 }) => {
   return (
     <Wrapper>
@@ -33,11 +35,29 @@ export const WeatherCell: React.FC<WeatherCellProps> = ({
           />
         </Row>
         <TemperatureTitle>Temperature:</TemperatureTitle>
-        <TemperatureValue>{Math.round(the_temp)}</TemperatureValue>
+        <TemperatureValue>
+          {Math.round(
+            temperatureUnit === "fahrenheit"
+              ? parseCelciusToFahrenheit(the_temp)
+              : the_temp
+          )}
+        </TemperatureValue>
         <TemperatureRow>
-          <p>{Math.round(max_temp)}</p>
+          <p>
+            {Math.round(
+              temperatureUnit === "fahrenheit"
+                ? parseCelciusToFahrenheit(max_temp)
+                : max_temp
+            )}
+          </p>
           <Separator>/</Separator>
-          <p>{Math.round(min_temp)}</p>
+          <p>
+            {Math.round(
+              temperatureUnit === "fahrenheit"
+                ? parseCelciusToFahrenheit(min_temp)
+                : min_temp
+            )}
+          </p>
         </TemperatureRow>
         <RowWithMargin>
           <p>Wind Speed:</p>

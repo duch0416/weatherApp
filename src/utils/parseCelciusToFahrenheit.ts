@@ -1,0 +1,1 @@
+export const parseCelciusToFahrenheit = (temperature: number): number => temperature + 273

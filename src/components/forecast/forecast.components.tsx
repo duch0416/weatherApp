@@ -1,23 +1,28 @@
 import { useForecast } from "../../hooks/useForecast";
 import { Loader } from "../loader/loader.compoent";
-import { WeatherCell } from "../wheatherCell/weatherCell.component";
-import { Wrapper } from "./forecast.styled";
+import { WeatherCell } from "../weatherCell/weatherCell.component";
+import { LocationName, Wrapper } from "./forecast.styled";
 import { ForecastProps } from "./forecast.types";
 
-export const Forecast: React.FC<ForecastProps> = ({ location }) => {
+export const Forecast: React.FC<ForecastProps> = ({ location, temperatureUnit }) => {
   const { data, isLoading } = useForecast(location);
-  console.log(data)
+
   return (
-    <Wrapper>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        data?.map(
-          (day): JSX.Element => (
-            <WeatherCell {...day.data[0]} key={day.data[0].id} />
+    <>
+      <LocationName>{data && data.data.title}</LocationName>
+      <Wrapper>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          data?.data.consolidated_weather.slice(0, 3).map(
+            (day): JSX.Element => (
+              <>
+                <WeatherCell {...day} key={day.id} temperatureUnit={temperatureUnit}/>
+              </>
+            )
           )
-        )
-      )}
-    </Wrapper>
+        )}
+      </Wrapper>
+    </>
   );
 };
