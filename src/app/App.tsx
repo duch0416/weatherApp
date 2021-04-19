@@ -22,7 +22,6 @@ const App: React.FC = () => {
   const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnit>('celsius');
   const [location, setLocation] = useLocalStorage<string>(
     StorageKeys.Location,
-    ""
   );
 
   const handleTemperatureUnitChange = (switchActive: boolean) => {
@@ -39,7 +38,7 @@ const App: React.FC = () => {
             <Search onSearch={setLocation} initValue={location} />
             <StyledSwitch onToggle={handleTemperatureUnitChange}/>
           </Row>
-          {!!location && <Forecast location={location} temperatureUnit={temperatureUnit} />}
+          <Forecast location={location} temperatureUnit={temperatureUnit} />
         </Container>
       </QueryClientProvider>
     </Main>

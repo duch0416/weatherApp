@@ -1,5 +1,6 @@
 export interface GetLocationParams {
   query?: string;
+  lattlong?: string;
 }
 
 export interface GetForecastParams {
