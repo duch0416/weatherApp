@@ -5,13 +5,17 @@ import { LocationName, Wrapper } from "./forecast.styled";
 import { ForecastProps } from "./forecast.types";
 
 export const Forecast: React.FC<ForecastProps> = ({ location, temperatureUnit }) => {
-  const { data, isLoading } = useForecast(location);
+  const { data, isLoading, status, error } = useForecast(location);
+
+  if(status === 'error') {
+    throw error
+  }
 
   return (
     <>
-      <LocationName>{data && data.data.title}</LocationName>
+      <LocationName>{data && data?.data.title}</LocationName>
       <Wrapper>
-        {!data?.data.consolidated_weather && !isLoading && <p>No data</p>}
+        {!data?.data.consolidated_weather && !isLoading && status !== 'idle' && <p>No data</p>}
         {isLoading ? (
           <Loader />
         ) : (

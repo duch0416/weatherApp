@@ -24,12 +24,21 @@ export const useForecast = (location?: string) => {
   const query = useQuery(
     [QueryKeys.Forecast, location, cords.latitude],
     async () => {
-      const res = await getLocation({ query: location, lattlong: !location ? `${cords.latitude},${cords.longitude}` : '' });
+      const res = await getLocation({
+        query: location,
+        lattlong: !location ? `${cords.latitude},${cords.longitude}` : "",
+      });
+
+      if(!res.data[0]?.woeid) {
+        throw new Error('No data for provided location')
+      }
+
       return await getForecast({ woeid: res.data[0].woeid });
     },
     {
       refetchOnWindowFocus: false,
-      enabled: !!cords.latitude || !!location
+      enabled: !!cords.latitude || !!location,
+      retry: 1,
     }
   );
 

@@ -5,8 +5,7 @@ import { useEffectAfterMount } from "../../hooks/useEffectAfterMount";
 import { SearchProps } from "./search.types";
 import { Input } from "./search.styled";
 
-export const Search: React.FC<SearchProps> = ({ onSearch, initValue }) => {
-  const [currentValue, setCurrentValue] = useState(initValue ?? "");
+export const Search: React.FC<SearchProps> = ({ onSearch, currentValue, setCurrentValue }) => {
   const [debauncedValue] = useDebounce(currentValue, 1000);
 
   const handleChange: ChangeEventHandler = (
@@ -20,7 +19,7 @@ export const Search: React.FC<SearchProps> = ({ onSearch, initValue }) => {
       onSearch(String(debauncedValue));
     }
   }, [debauncedValue]);
-
+  
   return (
     <div>
       <Input value={currentValue} onChange={handleChange} placeholder="search" />

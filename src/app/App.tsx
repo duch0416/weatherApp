@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { Forecast } from "../components/forecast/forecast.components";
 import { Search } from "../components/search/search.component";
@@ -9,6 +10,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Container, Main, InerfaceContainer, StyledSwitch } from "./app.styled";
 import { GlobalStyle } from "../globalStyle";
 import { TemperatureUnit } from "../types/temperatureUnit.type";
+import { ErrorFallback } from "../components/errorFallback/errorFallback.component";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,14 +21,22 @@ const queryClient = new QueryClient({
 });
 
 const App: React.FC = () => {
-  const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnit>('celsius');
-  const [location, setLocation] = useLocalStorage<string>(
-    StorageKeys.Location,
+  const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnit>(
+    "celsius"
   );
+  const [location, setLocation] = useLocalStorage<string>(StorageKeys.Location);
+  const [currentValue, setCurrentValue] = useState(location ?? "");
 
   const handleTemperatureUnitChange = (switchActive: boolean) => {
-    switchActive ? setTemperatureUnit('fahrenheit') : setTemperatureUnit('celsius');
-  }
+    switchActive
+      ? setTemperatureUnit("fahrenheit")
+      : setTemperatureUnit("celsius");
+  };
+
+  const handleReset = () => {
+    setLocation("");
+    setCurrentValue("");
+  };
 
   return (
     <Main>
@@ -35,10 +45,20 @@ const App: React.FC = () => {
         <ReactQueryDevtools initialIsOpen={false} />
         <Container>
           <InerfaceContainer>
-            <Search onSearch={setLocation} initValue={location} />
-            <StyledSwitch onToggle={handleTemperatureUnitChange}/>
+            <Search
+              onSearch={setLocation}
+              setCurrentValue={setCurrentValue}
+              currentValue={currentValue}
+            />
+            <StyledSwitch onToggle={handleTemperatureUnitChange} />
           </InerfaceContainer>
-          <Forecast location={location} temperatureUnit={temperatureUnit} />
+          <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onReset={handleReset}
+            resetKeys={[location]}
+          >
+            <Forecast location={location} temperatureUnit={temperatureUnit} />
+          </ErrorBoundary>
         </Container>
       </QueryClientProvider>
     </Main>

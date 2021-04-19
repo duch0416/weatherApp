@@ -1,4 +1,5 @@
 export interface SearchProps {
-  initValue?: string;
+  setCurrentValue: (phrase: string) => void;
+  currentValue: string;
   onSearch?: (phrase: string) => void;
 }
