@@ -7,6 +7,7 @@ import {
   GetForecastParams,
   GetLocationParams,
 } from "../models/getForecastParams";
+import { GetForecatRes } from "../response/getForecast.response";
 import { GetLocationRes } from "../response/getLocation.response";
 
 export const getLocation = (
@@ -16,4 +17,4 @@ export const getLocation = (
 
 export const getForecast = ({
   woeid,
-}: GetForecastParams): Promise<AxiosResponse<{ consolidated_weather: Array<Forecast>; title: string }>> => api.get(`/location/${woeid}`);
+}: GetForecastParams): Promise<AxiosResponse<GetForecatRes>> => api.get(`/location/${woeid}`);

@@ -42,7 +42,6 @@ const App: React.FC = () => {
     <Main>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
         <Container>
           <InerfaceContainer>
             <Search
