@@ -1,7 +1,7 @@
 import { Forecast } from "../service/models/forecast";
 
 export const forecastMock: Forecast = {
-  id: 6747884272746496,
+  id: 67478842727464963,
   weather_state_name: "Heavy Cloud",
   weather_state_abbr: "hc",
   applicable_date: "2021-04-19",
@@ -18,7 +18,7 @@ export const forecastMock: Forecast = {
 
 export const forecastArrayMock: Forecast[] = [
   {
-    id: 67478842727464961,
+    id: 674788427274649612,
     weather_state_name: "Heavy Cloud",
     weather_state_abbr: "hc",
     applicable_date: "2021-04-19",
@@ -33,7 +33,7 @@ export const forecastArrayMock: Forecast[] = [
     predictability: 71,
   },
   {
-    id: 67478842727464962,
+    id: 6747884272743264962,
     weather_state_name: "Heavy Cloud",
     weather_state_abbr: "hc",
     applicable_date: "2021-04-20",

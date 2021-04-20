@@ -1,0 +1,1 @@
+export const celciusToFahrenheit = (temperature: number): number => temperature + 273

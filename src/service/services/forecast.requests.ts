@@ -2,7 +2,6 @@ import { AxiosResponse } from "axios";
 import { stringify } from "query-string";
 
 import { api } from "../api";
-import { Forecast } from "../models/forecast";
 import {
   GetForecastParams,
   GetLocationParams,

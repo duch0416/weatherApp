@@ -9,38 +9,43 @@ import {
 import { getGeolocation } from "../utils/getGeolocation";
 
 export const useForecast = (location?: string) => {
-  const [cords, setCords] = useState<GeolocationCoordinates>(
-    {} as GeolocationCoordinates
-  );
-
+  const [cords, setCords] = useState({} as GeolocationCoordinates)
+  const [loading, setIsloading] = useState(false);
   const getCords = (position: GeolocationPosition) => {
     setCords(position.coords);
   };
 
   useEffect(() => {
-    getGeolocation(getCords);
-  }, []);
+    if(cords.latitude) return
+    setIsloading(true)
+    getGeolocation(getCords)
+  }, [cords.latitude])
+
+  console.log(loading);
 
   const query = useQuery(
-    [QueryKeys.Forecast, location, cords.latitude],
+    [QueryKeys.Forecast, location],
     async () => {
       const res = await getLocation({
         query: location,
-        lattlong: !location ? `${cords.latitude},${cords.longitude}` : "",
+        lattlong: !location && cords.latitude ? `${cords.latitude},${cords.longitude}` : "",
       });
 
       if(!res.data[0]?.woeid) {
         throw new Error('No data for provided location')
       }
 
-      return await getForecast({ woeid: res.data[0].woeid });
+      const result = await getForecast({ woeid: res.data[0].woeid });
+      setIsloading(false);
+      return result;
     },
     {
       refetchOnWindowFocus: false,
       enabled: !!cords.latitude || !!location,
+      staleTime: 1000 * 60 * 60,
       retry: 1,
     }
   );
 
-  return query;
+  return { ...query, loadingCordinates: loading };
 };

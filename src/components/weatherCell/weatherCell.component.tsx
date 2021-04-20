@@ -11,7 +11,7 @@ import {
   Wrapper,
   DateText,
 } from "./weatherCell.styled";
-import { parseCelciusToFahrenheit } from "../../utils/parseCelciusToFahrenheit";
+import { celciusToFahrenheit } from "../../utils/celciusToFahrenheit";
 
 export const WeatherCell: React.FC<WeatherCellProps> = ({
   weather_state_abbr,
@@ -39,7 +39,7 @@ export const WeatherCell: React.FC<WeatherCellProps> = ({
         <TemperatureValue>
           {Math.round(
             temperatureUnit === "fahrenheit"
-              ? parseCelciusToFahrenheit(the_temp)
+              ? celciusToFahrenheit(the_temp)
               : the_temp
           )}
         </TemperatureValue>
@@ -47,7 +47,7 @@ export const WeatherCell: React.FC<WeatherCellProps> = ({
           <p>
             {Math.round(
               temperatureUnit === "fahrenheit"
-                ? parseCelciusToFahrenheit(max_temp)
+                ? celciusToFahrenheit(max_temp)
                 : max_temp
             )}
           </p>
@@ -55,7 +55,7 @@ export const WeatherCell: React.FC<WeatherCellProps> = ({
           <p>
             {Math.round(
               temperatureUnit === "fahrenheit"
-                ? parseCelciusToFahrenheit(min_temp)
+                ? celciusToFahrenheit(min_temp)
                 : min_temp
             )}
           </p>

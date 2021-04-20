@@ -1,7 +1,7 @@
-export const getGeolocation = (cb: PositionCallback) => {
+export const getGeolocation = (succes: PositionCallback) => {
   if (!navigator.geolocation) {
     return;
   }
 
-  navigator.geolocation.getCurrentPosition(cb);
+  navigator.geolocation.getCurrentPosition(succes);
 };

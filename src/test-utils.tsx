@@ -16,9 +16,7 @@ const queryClient = new QueryClient({
 const server: SetupServerApi = setupServer(...handlers);
 
 beforeAll((): void =>
-  server.listen({
-    onUnhandledRequest: 'warn',
-  })
+  server.listen()
 );
 afterEach((): void => server.resetHandlers());
 afterAll((): void => server.close());

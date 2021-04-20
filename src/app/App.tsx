@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -7,7 +6,12 @@ import { Forecast } from "../components/forecast/forecast.components";
 import { Search } from "../components/search/search.component";
 import { StorageKeys } from "../enums/storageKeys.enum";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Container, Main, InerfaceContainer, StyledSwitch } from "./app.styled";
+import {
+  Container,
+  Main,
+  InerfaceContainer,
+  StyledSwitch,
+} from "./app.styled";
 import { GlobalStyle } from "../globalStyle";
 import { TemperatureUnit } from "../types/temperatureUnit.type";
 import { ErrorFallback } from "../components/errorFallback/errorFallback.component";

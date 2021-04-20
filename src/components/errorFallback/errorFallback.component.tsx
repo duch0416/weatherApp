@@ -11,7 +11,7 @@ export const ErrorFallback: React.FC<FallbackProps> = ({
       <ErrorIcon src='https://www.metaweather.com/static/img/weather/t.svg'/>
       <p>Upss....</p>
       <p>{error.message}</p>
-      <ResetButton onClick={resetErrorBoundary}>reset</ResetButton>
+      <ResetButton onClick={resetErrorBoundary}>try again</ResetButton>
     </Wrapper>
   );
 };
