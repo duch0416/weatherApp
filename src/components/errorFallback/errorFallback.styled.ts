@@ -20,7 +20,7 @@ export const ResetButton = styled.button`
   margin-top: 20px;
   padding: 5px 20px;
   outline: none;
-  border: 1px solid ${Color.White};
+  border: 1px solid ${Color.Black};
 `;
 
 export const ErrorIcon = styled(SVG)`
