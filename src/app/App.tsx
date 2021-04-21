@@ -54,7 +54,7 @@ const App: React.FC = () => {
         {status === "loading" && (
           <Overlay data-testid="overlay">
             <BouncingLoader
-              src={"https://www.metaweather.com/static/img/weather/t.svg"}
+              src={"https://cors-anywhere.herokuapp.com/https://www.metaweather.com/static/img/weather/t.svg"}
             />
           </Overlay>
         )}
