@@ -32,6 +32,7 @@ export const useCordinates = (location: string) => {
     if(!!cords.lat || !!location) return
     setStatus('loading')
     getGeolocation(getCords, setError)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
