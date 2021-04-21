@@ -32,7 +32,7 @@ export const WeatherCell: React.FC<WeatherCellProps> = ({
         <Row>
           <p>{weather_state_name}</p>
           <WeatherStateIcon
-            src={`https://www.metaweather.com/static/img/weather/${weather_state_abbr}.svg`}
+            src={`https://cors-anywhere.herokuapp.com/https://www.metaweather.com/static/img/weather/${weather_state_abbr}.svg`}
           />
         </Row>
         <TemperatureTitle>Temperature:</TemperatureTitle>
