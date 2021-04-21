@@ -1,11 +1,11 @@
-import { render, RenderOptions } from '@testing-library/react';
-import { FC, ReactElement } from 'react';
-import { setupServer, SetupServerApi } from 'msw/node';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { render, RenderOptions } from "@testing-library/react";
+import { FC, ReactElement } from "react";
+import { setupServer, SetupServerApi } from "msw/node";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-import { handlers } from './serverHandlers';
+import { handlers } from "./serverHandlers";
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
@@ -13,27 +13,23 @@ const queryClient = new QueryClient({
   },
 });
 
-const server: SetupServerApi = setupServer(...handlers);
+export const server: SetupServerApi = setupServer(...handlers);
 
-beforeAll((): void =>
-  server.listen()
-);
+beforeAll((): void => server.listen());
 afterEach((): void => server.resetHandlers());
 afterAll((): void => server.close());
 
 const AllTheProviders: FC = ({ children }) => {
   return (
-    <QueryClientProvider client={queryClient}>
-        {children}
-    </QueryClientProvider>
-  )
-}
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+};
 
 const customRender = (
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'queries'>
-) => render(ui, { wrapper: AllTheProviders, ...options })
+  options?: Omit<RenderOptions, "queries">
+) => render(ui, { wrapper: AllTheProviders, ...options });
 
-export * from '@testing-library/react'
+export * from "@testing-library/react";
 
-export { customRender as render }
+export { customRender as render };

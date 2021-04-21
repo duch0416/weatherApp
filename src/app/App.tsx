@@ -6,15 +6,19 @@ import { Forecast } from "../components/forecast/forecast.components";
 import { Search } from "../components/search/search.component";
 import { StorageKeys } from "../enums/storageKeys.enum";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Container, Main, InerfaceContainer, StyledSwitch, GeolocationError } from "./app.styled";
+import {
+  Container,
+  Main,
+  InerfaceContainer,
+  StyledSwitch,
+  GeolocationError,
+  BouncingLoader,
+  Overlay,
+} from "./app.styled";
 import { GlobalStyle } from "../globalStyle";
 import { TemperatureUnit } from "../types/temperatureUnit.type";
 import { ErrorFallback } from "../components/errorFallback/errorFallback.component";
 import { useCordinates } from "../hooks/useCordinates";
-import {
-  BouncingLoader,
-  Overlay,
-} from "../components/forecast/forecast.styled";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +29,9 @@ const queryClient = new QueryClient({
 });
 
 const App: React.FC = () => {
-  const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnit>("celsius");
+  const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnit>(
+    "celsius"
+  );
   const [location, setLocation] = useLocalStorage<string>(StorageKeys.Location);
   const [currentValue, setCurrentValue] = useState(location ?? "");
   const { cords, status, errorMessage } = useCordinates(location);
@@ -45,7 +51,7 @@ const App: React.FC = () => {
     <Main>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        {status === 'loading' && (
+        {status === "loading" && (
           <Overlay data-testid="overlay">
             <BouncingLoader
               src={"https://www.metaweather.com/static/img/weather/t.svg"}
@@ -61,7 +67,9 @@ const App: React.FC = () => {
             />
             <StyledSwitch onToggle={handleTemperatureUnitChange} />
           </InerfaceContainer>
-          {status === 'error' && <GeolocationError>{errorMessage}</GeolocationError>}
+          {status === "error" && (
+            <GeolocationError>{errorMessage}</GeolocationError>
+          )}
           <ErrorBoundary
             FallbackComponent={ErrorFallback}
             onReset={handleReset}
