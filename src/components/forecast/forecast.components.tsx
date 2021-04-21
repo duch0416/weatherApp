@@ -5,18 +5,18 @@ import { Loader } from "../loader/loader.compoent";
 import { WeatherCell } from "../weatherCell/weatherCell.component";
 import {
   LocationName,
-  Overlay,
   Wrapper,
-  BouncingLoader,
 } from "./forecast.styled";
 import { ForecastProps } from "./forecast.types";
 
 export const Forecast: React.FC<ForecastProps> = ({
   location,
   temperatureUnit,
+  cords,
 }) => {
-  const { data, isLoading, status, error, loadingCordinates } = useForecast(
-    location
+  const { data, isLoading, status, error } = useForecast(
+    location,
+    cords,
   );
 
   if (status === "error") {
@@ -25,19 +25,12 @@ export const Forecast: React.FC<ForecastProps> = ({
 
   return (
     <>
-      {loadingCordinates && (
-        <Overlay data-testid='overlay'>
-          <BouncingLoader
-            src={"https://www.metaweather.com/static/img/weather/t.svg"}
-          />
-        </Overlay>
-      )}
       <LocationName>{data && data?.data.title}</LocationName>
       <Wrapper>
         {!data?.data.consolidated_weather &&
           !isLoading &&
           status !== "idle" && <p>No data</p>}
-        {isLoading && !loadingCordinates ? (
+        {isLoading ? (
           <Loader />
         ) : (
           data?.data.consolidated_weather

@@ -6,15 +6,15 @@ import { Forecast } from "../components/forecast/forecast.components";
 import { Search } from "../components/search/search.component";
 import { StorageKeys } from "../enums/storageKeys.enum";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import {
-  Container,
-  Main,
-  InerfaceContainer,
-  StyledSwitch,
-} from "./app.styled";
+import { Container, Main, InerfaceContainer, StyledSwitch, GeolocationError } from "./app.styled";
 import { GlobalStyle } from "../globalStyle";
 import { TemperatureUnit } from "../types/temperatureUnit.type";
 import { ErrorFallback } from "../components/errorFallback/errorFallback.component";
+import { useCordinates } from "../hooks/useCordinates";
+import {
+  BouncingLoader,
+  Overlay,
+} from "../components/forecast/forecast.styled";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,11 +25,10 @@ const queryClient = new QueryClient({
 });
 
 const App: React.FC = () => {
-  const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnit>(
-    "celsius"
-  );
+  const [temperatureUnit, setTemperatureUnit] = useState<TemperatureUnit>("celsius");
   const [location, setLocation] = useLocalStorage<string>(StorageKeys.Location);
   const [currentValue, setCurrentValue] = useState(location ?? "");
+  const { cords, status, errorMessage } = useCordinates(location);
 
   const handleTemperatureUnitChange = (switchActive: boolean) => {
     switchActive
@@ -46,6 +45,13 @@ const App: React.FC = () => {
     <Main>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
+        {status === 'loading' && (
+          <Overlay data-testid="overlay">
+            <BouncingLoader
+              src={"https://www.metaweather.com/static/img/weather/t.svg"}
+            />
+          </Overlay>
+        )}
         <Container>
           <InerfaceContainer>
             <Search
@@ -55,12 +61,17 @@ const App: React.FC = () => {
             />
             <StyledSwitch onToggle={handleTemperatureUnitChange} />
           </InerfaceContainer>
+          {status === 'error' && <GeolocationError>{errorMessage}</GeolocationError>}
           <ErrorBoundary
             FallbackComponent={ErrorFallback}
             onReset={handleReset}
             resetKeys={[location]}
           >
-            <Forecast location={location} temperatureUnit={temperatureUnit} />
+            <Forecast
+              location={location}
+              temperatureUnit={temperatureUnit}
+              cords={cords}
+            />
           </ErrorBoundary>
         </Container>
       </QueryClientProvider>

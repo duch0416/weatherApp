@@ -4,6 +4,6 @@ import { LoaderProps } from "./loader.types";
 
 export const Loader: React.FC<LoaderProps> = ({ className }) => (
   <div data-testid="loader-container" className={className}>
-    <LoaderIcon src={sunImg} data-testid="loader" />
+    <LoaderIcon src={sunImg} />
   </div>
 );

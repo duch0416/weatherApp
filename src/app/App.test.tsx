@@ -12,8 +12,8 @@ test('It displays proper data', async () => {
   userEvent.type(input, 'h');
 
   expect(input).toHaveValue('h')
-  await waitFor(() => expect(getByTestId('overlay')).toBeInTheDocument())
-  await waitForElementToBeRemoved(getByTestId('overlay'))
+  await waitFor(() => expect(getByTestId('loader-container')).toBeInTheDocument())
+  await waitForElementToBeRemoved(getByTestId('loader-container'))
 
   expect(getByText(forecastArrayMock[0].applicable_date)).toBeInTheDocument()
   expect(getByText(forecastArrayMock[1].applicable_date)).toBeInTheDocument()

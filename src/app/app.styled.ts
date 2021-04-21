@@ -34,6 +34,10 @@ export const StyledSwitch = styled(Switch)`
   }
 `;
 
+export const GeolocationError = styled.p`
+  margin-top: 20px;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;

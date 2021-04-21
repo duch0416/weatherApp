@@ -19,7 +19,7 @@ test('It renders with props data', () => {
   expect(getByText(props.applicable_date)).toBeInTheDocument();
 })
 
-test('It renders with propet temperature unit', () => {
+test('It renders with proper temperature unit', () => {
   const { getByText, rerender } = render(<WeatherCell {...props}/>)
 
   expect(getByText(Math.round(props.max_temp))).toBeInTheDocument();
