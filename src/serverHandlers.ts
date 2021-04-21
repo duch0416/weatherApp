@@ -3,7 +3,7 @@ import { forecastArrayMock } from "./mocks/forecast.mock";
 
 const handlers: RestHandler[] = [
   rest.get(
-    `https://www.metaweather.com/api/location/search`,
+    `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search`,
     async (req, res, ctx) => {
       const location = req.url.searchParams.get("query");
 
@@ -29,7 +29,7 @@ const handlers: RestHandler[] = [
     }
   ),
   rest.get(
-    "https://www.metaweather.com/api/location/:id",
+    "https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/:id",
     async (req, res, ctx) => {
       return res(
         ctx.json({
